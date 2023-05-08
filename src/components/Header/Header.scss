@@ -1,0 +1,17 @@
+.header{
+    .logo{
+        font-weight: 900;
+    }
+    .accordion-button, .accordion-body{
+        padding: 0;
+    }
+    .accordion-body{
+        position: absolute;
+        width: 315px;
+        z-index: 10;
+    }
+    .form-control-lg{
+        font-size: 1.25rem !important;
+        text-transform: capitalize;
+    }
+}

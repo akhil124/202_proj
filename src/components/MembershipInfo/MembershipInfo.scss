@@ -1,0 +1,101 @@
+.header-text {
+  color: rgb(209, 164, 77);
+  text-align: center;
+  font-weight: 600;
+  font-size: 2.6rem;
+  line-height: 3.4rem;
+  letter-spacing: 0.6rem;
+  padding: 0;
+}
+
+
+.image-header {
+  height: 400px;
+}
+
+.products-title {
+  text-align: center;
+  font-weight: 600;
+}
+
+.product-wrapper {
+  // display: flex;
+  border: 0.19235rem solid rgb(232, 232, 232);
+  border-radius: 5px;
+  width: 250px;
+  text-align: center;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background: none;
+  color: rgb(54, 54, 54);
+ margin-left: 10px;
+ margin-right: 10px;
+ position: relative;
+ margin-top: 50px;
+//  background: linear-gradient(156.87deg, rgb(83, 140, 238) 5.78%, rgb(17, 85, 203) 72.87%);
+//  align-items: center;
+}
+
+.text-card {
+  // margin-top: 10px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.items-container {
+justify-content: center;
+
+}
+
+.text-cross {
+  content: "";
+  width: 30%;
+  // position: absolute;
+  right: 0px;
+  top: 20px;
+  border-bottom: 0.2rem solid rgb(239, 79, 95);
+  transform: rotate(-13deg);
+}
+
+.text-bold {
+  font-weight: 600;
+  font-size: 35px;
+  line-height: 4rem;
+  text-align: center;
+}
+
+.most-popular {
+  background: linear-gradient(156.87deg, rgb(83, 140, 238) 5.78%, rgb(17, 85, 203) 72.87%);
+  p {
+    color: white;
+  }
+  .most-popular-title{
+    position: absolute;
+    top: -38px;
+    color: black;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.5rem;
+    text-align: center;
+    background: rgb(219, 232, 255);
+    height: 2.7rem;
+    padding: 0.5rem 0px;
+    color: rgb(8, 36, 84);
+    letter-spacing: 1.5px;
+    border-radius: 1.5388rem 1.5388rem 0px 0px;
+  }
+  button{
+    background-color: #212529;;
+  }
+} 
+
+.discount-text {
+  font-weight: 600;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  color: rgb(83, 140, 238);
+  background: rgb(216 219 224 / 0.8);
+  border-radius: 0.769399rem;
+  padding: 0.2rem 0.8rem
+}

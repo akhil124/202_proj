@@ -1,0 +1,25 @@
+.amenity-icon{
+    width: 4rem;
+    height: 4rem;
+    img{
+        width: 100%;
+    }
+}
+
+.activity-container{
+align-items: center;
+}
+
+.tab-container{
+    margin-left: 500px;
+}
+
+.activity-wrapper {
+    width: 100%;
+    max-width: 73.4rem;
+    height: max-content;
+    max-height: 55.4rem;
+    background: white;
+    margin-top: 1.6rem;
+    border-radius: 0.8rem;
+}

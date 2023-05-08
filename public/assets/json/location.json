@@ -1,0 +1,32 @@
+[
+    {
+      "name": "mumbai",
+      "state": "Maharashtra",
+      "population": 12.48,
+      "area": 603.4
+    },
+    {
+      "name": "delhi",
+      "state": "Delhi",
+      "population": 11.32,
+      "area": 1484
+    },
+    {
+      "name": "bangalore",
+      "state": "Karnataka",
+      "population": 8.52,
+      "area": 709.5
+    },
+    {
+      "name": "hyderabad",
+      "state": "Telangana",
+      "population": 6.81,
+      "area": 650
+    },
+    {
+      "name": "chennai",
+      "state": "Tamil Nadu",
+      "population": 7.09,
+      "area": 426
+    }
+  ]  

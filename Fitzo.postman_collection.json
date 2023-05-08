@@ -1,0 +1,485 @@
+{
+	"info": {
+		"_postman_id": "e338dae6-7c2e-45a3-8547-45541f8a524c",
+		"name": "Fitzo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16167388",
+		"_collection_link": "https://interstellar-space-641439.postman.co/workspace/Faang~7660e2e3-3e1d-4b66-9a5d-d706c73d36d6/collection/16167388-e338dae6-7c2e-45a3-8547-45541f8a524c?action=share&creator=16167388&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Activities",
+			"item": [
+				{
+					"name": "Activities By Location",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{CURR_DOMAIN}}/activities/location/hyderabad",
+							"host": [
+								"{{CURR_DOMAIN}}"
+							],
+							"path": [
+								"activities",
+								"location",
+								"hyderabad"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activity Slots By Location",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{CURR_DOMAIN}}/activities/boxing/location/hyderabad",
+							"host": [
+								"{{CURR_DOMAIN}}"
+							],
+							"path": [
+								"activities",
+								"boxing",
+								"location",
+								"hyderabad"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Activites",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{CURR_DOMAIN}}/activities/",
+							"host": [
+								"{{CURR_DOMAIN}}"
+							],
+							"path": [
+								"activities",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"test@gmail.com\",\r\n  \"password\":\"test1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CURR_DOMAIN}}/user/login",
+							"host": [
+								"{{CURR_DOMAIN}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"test@gmail.com\",\r\n  \"password\":\"test1234\",\r\n  \"firstName\": \"Test\",\r\n  \"lastName\": \"Chan\",\r\n  \"dateOfBirth\": \"11-03-1999\",\r\n  \"gender\": \"Male\",\r\n  \"location\": \"Bellandur\",\r\n  \"role\": \"member\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CURR_DOMAIN}}/user/create",
+							"host": [
+								"{{CURR_DOMAIN}}"
+							],
+							"path": [
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"test@gmail.com\",\r\n  \"password\":\"test1234\",\r\n  \"firstName\": \"Test\",\r\n  \"lastName\": \"Chan\",\r\n  \"dateOfBirth\": \"11-03-1999\",\r\n  \"gender\": \"Male\",\r\n  \"location\": \"Bellandur\",\r\n  \"role\": \"member\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CURR_DOMAIN}}/user/update",
+							"host": [
+								"{{CURR_DOMAIN}}"
+							],
+							"path": [
+								"user",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CURR_DOMAIN}}/user/delete/10",
+							"host": [
+								"{{CURR_DOMAIN}}"
+							],
+							"path": [
+								"user",
+								"delete",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Slots",
+			"item": [
+				{
+					"name": "Book Slot",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"date\": \"2023-05-01T13:34:00.000\", \"activityname\": \"cycling\", \"slotid\": \"CYC0600\" , \"userid\": \"1\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CURR_DOMAIN}}/slot/add-user",
+							"host": [
+								"{{CURR_DOMAIN}}"
+							],
+							"path": [
+								"slot",
+								"add-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"date\": \"2023-05-01T13:34:00.000\", \"activityname\": \"boxing\", \"slotid\": \"HYD0600\" , \"userid\": \"4\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CURR_DOMAIN}}/slot//remove-user",
+							"host": [
+								"{{CURR_DOMAIN}}"
+							],
+							"path": [
+								"slot",
+								"",
+								"remove-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Users for Slot",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"date\": \"2023-05-01T13:34:00.000\", \"activityname\": \"boxing\", \"slotid\": \"HYD0600\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CURR_DOMAIN}}/slot/user-list",
+							"host": [
+								"{{CURR_DOMAIN}}"
+							],
+							"path": [
+								"slot",
+								"user-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Slots for Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{CURR_DOMAIN}}/user/slot/2",
+							"host": [
+								"{{CURR_DOMAIN}}"
+							],
+							"path": [
+								"user",
+								"slot",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subscriptions",
+			"item": [
+				{
+					"name": "All Subscriptions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{CURR_DOMAIN}}/subscription/all",
+							"host": [
+								"{{CURR_DOMAIN}}"
+							],
+							"path": [
+								"subscription",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Subscription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Premium Quarter year\",\r\n  \"type\": \"Premium\",\r\n  \"price\": \"179\",\r\n  \"description\": \"3 months plan to get access for all the activities\",\r\n  \"validity\": 90\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CURR_DOMAIN}}/subscription/create",
+							"host": [
+								"{{CURR_DOMAIN}}"
+							],
+							"path": [
+								"subscription",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Subscription",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"64502668313c7ef7cffaf1ff\",\r\n    \"name\": \"Premium Half year\",\r\n    \"type\": \"Premium\",\r\n    \"price\": 289,\r\n    \"description\": \"6 months plan to get access for all the activities\",\r\n    \"validity\": 180,\r\n    \"__v\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CURR_DOMAIN}}/subscription/update",
+							"host": [
+								"{{CURR_DOMAIN}}"
+							],
+							"path": [
+								"subscription",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Subscription",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Premium Half year\",\r\n  \"type\": \"Premium\",\r\n  \"price\": \"299\",\r\n  \"description\": \"6 months plan to get access for all the activities\",\r\n  \"validity\": 180\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CURR_DOMAIN}}/subscription/delete/645026f7365c9628d9a71adf",
+							"host": [
+								"{{CURR_DOMAIN}}"
+							],
+							"path": [
+								"subscription",
+								"delete",
+								"645026f7365c9628d9a71adf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upgrade Subscription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userid\": \"64502f627b95c2820a46e9a7\",\r\n  \"subscriptionid\": \"64502668313c7ef7cffaf1ff\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CURR_DOMAIN}}/user/upgrade-subscribe",
+							"host": [
+								"{{CURR_DOMAIN}}"
+							],
+							"path": [
+								"user",
+								"upgrade-subscribe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Subscription Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userid\": \"64502f627b95c2820a46e9a7\",\r\n  \"subscriptionid\": \"64502668313c7ef7cffaf1ff\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CURR_DOMAIN}}/user/subscribe",
+							"host": [
+								"{{CURR_DOMAIN}}"
+							],
+							"path": [
+								"user",
+								"subscribe"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "CURR_DOMAIN",
+			"value": "http://localhost:5000"
+		}
+	]
+}
