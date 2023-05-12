@@ -19,7 +19,7 @@ async function createUser(userDetails) {
   }
 }
 
-//Login User
+//Validate User
 async function validateUser(email, password) {
   try {
     const user = await UserModel.findOne({ email: email });
@@ -37,7 +37,7 @@ async function validateUser(email, password) {
   }
 }
 
-//Login User
+//Update User
 async function updateUser(userDetails) {
   try {
     const user = await UserModel.findOneAndUpdate(
@@ -54,6 +54,34 @@ async function updateUser(userDetails) {
   }
 }
 
+//Delte User
+async function deleteUser(email) {
+  try {
+    const user = await UserModel.findOneAndDelete({ email: email });
+    if (!user) {
+      throw Error("User not found");
+    }
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
+//Get All Users
+async function getAllUsers() {
+  try {
+    const users = await UserModel.find();
+    if (!users) {
+      throw Error("Error retrieving users");
+    }
+    return users;
+  } catch (error) {
+    throw Error(error);
+  }
+}
+
+
+//Get User Bookings
 async function getUserBookings(userid) {
   try {
     const slotBookings = await SlotLogModel.find({ usersBooked: userid });
@@ -66,6 +94,7 @@ async function getUserBookings(userid) {
   }
 }
 
+//Buy Membership
 async function subscribeUser(userSubscribeDetails) {
   try {
     const user = await UserModel.findById(userSubscribeDetails.userid);
@@ -95,6 +124,7 @@ async function subscribeUser(userSubscribeDetails) {
   }
 }
 
+//Upgrade Membership
 async function upgradeSubscription(userSubscribeDetails) {
   try {
     const user = await UserModel.findById(userSubscribeDetails.userid);
@@ -127,4 +157,6 @@ export {
   updateUser,
   subscribeUser,
   upgradeSubscription,
+  deleteUser,
+  getAllUsers,
 };

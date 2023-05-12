@@ -15,7 +15,7 @@ const useApi = (
   const [loading, setloading] = useState(true);
 
   const fetchData = () => {
-    axios[method](url, JSON.parse(headers), JSON.parse(body))
+    axios[method](url, JSON.parse(headers), body)
       .then((res) => {
         setResponse(res.data);
       })

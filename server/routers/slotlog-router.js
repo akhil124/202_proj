@@ -45,7 +45,7 @@ router.get("/user-list", async (req, res) => {
 
 
 //Remove Users for a slot
-router.post("/remove-user", async (req, res) => {
+router.delete("/remove-user", async (req, res) => {
   try {
     const { date, activityname, slotid, userid } = req.body;
     const users = await removeUserFromSlot(

@@ -1,29 +1,39 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import "./MembershipInfo.scss";
-import { Container, Row, Col, Card, Image, Button } from "react-bootstrap";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Container, Row, Image, Button } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
 
 import useApi from "../../hooks/useApi";
-import { activityType } from "../../constants/activityConstants";
 import COLOR from "../../constants/colors";
 import Header from "../Header/Header";
+import { useAuth } from "../../hooks/useAuth";
+import AlertDismiss from "../../common/Alert";
 
 const MembershipInfo = () => {
-  const { response, error, loading } = useApi(`/subscription/all`, "get");
+  const { response } = useApi(`/subscription/all`, "get");
+  const [error, setError] = useState("");
   const Subscriptions = useMemo(() => response?.data ?? [], [response]);
   const { location = "hyderabad" } = useParams();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const discCalucate = (price, discount) => {
     return price - (price * discount) / 100;
   };
-  const getFitzoIcon = () =>
-    "https://fitso-images.curefit.co/uploads/fitso-logo1628748943.png";
 
-  const fitzoIcon = () =>
-    "https://fitso-images.curefit.co/uploads/PurchaseBgImage.png";
+  const handleSubmit = (membership) => {
+    if (!user) {
+      setError("Please login to purchase a membership");
+    } else {
+      window.localStorage.setItem("payment", JSON.stringify(membership));
+      navigate("/payment")
+    }
+  };
+
   return (
     <Container fluid="none" className="membership-container">
       <Header city={location}></Header>
+      {error && <AlertDismiss message={error} setError={setError} />}
       <Row className="image-container">
         <Image
           className="image-header"
@@ -81,7 +91,11 @@ const MembershipInfo = () => {
             <hr />
             <Button
               className="px-5 py-2 mb-3"
-              style={{ background: membership?.most_popular ? "#212529" : COLOR.PEACH, border: "none" }}
+              style={{
+                background: membership?.most_popular ? "#212529" : COLOR.PEACH,
+                border: "none",
+              }}
+              onClick={() => handleSubmit(membership)}
             >
               {membership?.type === "Trial" ? "Free Trial" : "Buy Now"}
             </Button>
@@ -92,44 +106,4 @@ const MembershipInfo = () => {
   );
 };
 
-const newComp = () => {};
-
-const oldComp = ({ Subscriptions }) => (
-  <div>
-    <div className="klXHNl header-background">
-      <img
-        alt="header background"
-        src="https://fitso-images.curefit.co/uploads/PurchaseBgImage.png"
-        loading="lazy"
-        className="sc-kEqXSa ivNGVQ"
-      ></img>
-    </div>
-    <div className="header">
-      <p className="product-name">MEMBERSHIP</p>
-      <p className="city-name">Hyderabad</p>
-    </div>
-    {/* </div> */}
-    <h2 className="products-title">Choose your plan</h2>
-    <div className="product-wrapper">
-      {Subscriptions?.map((membership) => (
-        <div className="membership-container">
-          <p className="duration">{membership.validity}</p>
-          <p className="duration-text">days</p>
-          <div className="discount-container">
-            <p className="discount-text">20% off</p>
-            <p className="price"> 150</p>
-          </div>
-          <p className="retail-price">120</p>
-          <p className="per-day-text">just $2/day</p>
-          <div className="separator">
-            <hr />
-          </div>
-          <div>
-            <p className="card-footer">Buy now</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-);
 export default MembershipInfo;

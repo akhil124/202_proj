@@ -1,47 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   MDBBtn,
   MDBInput,
   MDBCheckbox,
-  MDBIcon,
   MDBRow,
   MDBCol,
 } from "mdb-react-ui-kit";
 import Icon from "../../common/Icon";
-import { useAuth } from "../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-// import { Col } from "react-bootstrap";
-// import Icon from "../../common/Icon";
-// import { faMars, faVenus } from "@fortawesome/free-solid-svg-icons";
+import { initialUser } from "../../constants/userConstants";
 
-const Register = () => {
-  const [userDetails, setUser] = useState({
-    email: "",
-    password: "",
-    cPassword: "",
-    firstName: "",
-    lastName: "",
-    gender: "",
-    dateOfBirth: "",
-    phone: "",
-    address: "",
-    city: "",
-    state: "",
-    zip: "",
-    country: "",
-    role: "non-member",
-  });
+const Register = ({ onSubmit, oAuth = false, update = false, preUser=initialUser }) => {
+  const [userDetails, setUser] = useState({ ...initialUser, ...preUser});
 
   const [error, setError] = useState("");
-
-  const { user, signup } = useAuth();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-  }, [user, navigate]);
 
   const handleChange = (e: any) => {
     //Verify if the password and confirm password are the same
@@ -66,33 +37,37 @@ const Register = () => {
     setUser({ ...userDetails, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (!error) {
-      signup(userDetails);
+      await onSubmit(userDetails);
     }
   };
 
   return (
     <>
-      <div className="text-center mb-3">
-        <p>Sign in with:</p>
-      </div>
-      <MDBRow className="d-flex justify-content-center">
-        <MDBCol size="auto">
-          <MDBBtn>
-            <Icon fa type="brands" icon="facebook" color="white" />
-          </MDBBtn>
-        </MDBCol>
-        <MDBCol size="auto">
-          <MDBBtn style={{ backgroundColor: "#ea4335" }}>
-            <Icon fa type="brands" icon="google" color="white" />
-          </MDBBtn>
-        </MDBCol>
-      </MDBRow>
-      <div className="text-center mb-3">
-        <p>or:</p>
-      </div>
+      {oAuth && (
+        <>
+          <div className="text-center mb-3">
+            <p>Sign in with:</p>
+          </div>
+          <MDBRow className="d-flex justify-content-center">
+            <MDBCol size="auto">
+              <MDBBtn>
+                <Icon fa type="brands" icon="facebook" color="white" />
+              </MDBBtn>
+            </MDBCol>
+            <MDBCol size="auto">
+              <MDBBtn style={{ backgroundColor: "#ea4335" }}>
+                <Icon fa type="brands" icon="google" color="white" />
+              </MDBBtn>
+            </MDBCol>
+          </MDBRow>
+          <div className="text-center mb-3">
+            <p>or:</p>
+          </div>
+        </>
+      )}
       {error && (
         <div className="alert alert-danger" role="alert">
           {error}
@@ -100,6 +75,7 @@ const Register = () => {
       )}
       <MDBInput
         name="firstName"
+        value={userDetails.firstName}
         wrapperClass="mb-4"
         label="Firstname"
         id="firstName-register"
@@ -108,6 +84,7 @@ const Register = () => {
       />
       <MDBInput
         name="lastName"
+        value={userDetails.lastName}
         wrapperClass="mb-4"
         label="Lastname"
         id="lastName-register"
@@ -116,6 +93,9 @@ const Register = () => {
       />
       <MDBInput
         name="email"
+        value={userDetails.email}
+        className={`${update && "disabled"}`}
+        disabled={update}
         wrapperClass="mb-4"
         label="Email"
         id="email-register"
@@ -140,6 +120,7 @@ const Register = () => {
       />
       <MDBInput
         name="dateOfBirth"
+        value={userDetails.dateOfBirth}
         wrapperClass="mb-4"
         label="Date of Birth"
         id="dateOfBirth-register"
@@ -148,6 +129,7 @@ const Register = () => {
       />
       <MDBInput
         name="phone"
+        value={userDetails.phone}
         wrapperClass="mb-4"
         label="Phone"
         id="phpne-register"
@@ -156,6 +138,7 @@ const Register = () => {
       />
       <MDBInput
         name="address"
+        value={userDetails.address}
         wrapperClass="mb-4"
         label="Address"
         id="address-register"
@@ -164,6 +147,7 @@ const Register = () => {
       />
       <MDBInput
         name="city"
+        value={userDetails.city}
         wrapperClass="mb-4"
         label="City"
         id="city-register"
@@ -172,6 +156,7 @@ const Register = () => {
       />
       <MDBInput
         name="state"
+        value={userDetails.state}
         wrapperClass="mb-4"
         label="State"
         id="state-register"
@@ -180,6 +165,7 @@ const Register = () => {
       />
       <MDBInput
         name="zip"
+        value={userDetails.zip}
         wrapperClass="mb-4"
         label="Zip"
         id="zip-register"
@@ -188,6 +174,7 @@ const Register = () => {
       />
       <MDBInput
         name="country"
+        value={userDetails.country}
         wrapperClass="mb-4"
         label="Country"
         id="country-register"
@@ -247,7 +234,7 @@ const Register = () => {
       </div>
 
       <MDBBtn className="mb-4 w-100" onClick={handleSubmit}>
-        Sign up
+        {update ? "Update" :"Sign up"}
       </MDBBtn>
     </>
   );

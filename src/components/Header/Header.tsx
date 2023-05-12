@@ -1,80 +1,52 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback } from "react";
 import "./Header.scss";
 import Container from "react-bootstrap/Container";
-import { Nav, Navbar, Form, ListGroup, Accordion } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import useApi from "../../hooks/useApi";
+import { Nav, Navbar } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import LocationInput from "../../common/LocationInput";
+import AvatarCircle from "../../common/Avatar";
 
 const Header = ({ city }: { city?: string }) => {
-  const {
-    response: locations = [],
-    error,
-    loading,
-  } = useApi(`/assets/json/location.json`, "get");
-
   const { user, signout } = useAuth();
+  const navigate = useNavigate();
+  const onChange = (loc) => {
+    const path = loc?.value;
+    navigate(`/${path}`);
+  };
 
-  const [locationInput, setLocation] = useState("");
-
-  const filteredLocations = useMemo(() => {
-    return locations?.filter((l) =>
-      l.name.toLowerCase().startsWith(locationInput.toLowerCase())
-    );
-  }, [locationInput, locations]);
+  const getAvatar = useCallback(() => {
+    const firstLetter = user?.firstName?.charAt(0).toLowerCase();
+    return `/assets/images/avatars/${firstLetter}-circle.png`;
+  }, [user]);
 
   return (
-    <Navbar bg="light" expand="lg" className="header p-sm-4">
+    <Navbar
+      bg="light"
+      expand="lg"
+      className="header p-sm-4"
+      style={{ position: "sticky", top: "0", zIndex: 1000 }}
+    >
       <Container>
         <Navbar.Brand href="/webapp">
           <h3 className="logo">FitZo</h3>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        {city && (
-          <Navbar.Collapse
-            id="basic-navbar-nav"
-            className="justify-content-end"
-          >
-            <Nav>
-              <Accordion className="mx-5">
-                <Accordion.Item eventKey="0">
-                  <Accordion.Header className="p-0">
-                    <Form.Control
-                      size="lg"
-                      type="text"
-                      placeholder={city}
-                      value={locationInput}
-                      className="h5 px-4 py-1 m-0"
-                      onChange={(e) => setLocation(e.target.value)}
-                    />
-                  </Accordion.Header>
-                  <Accordion.Body>
-                    <ListGroup>
-                      {filteredLocations?.map((item) => (
-                        <ListGroup.Item key={item.name}>
-                          <Link
-                            to={`/${item.name}`}
-                            className="text-capitalize"
-                            onClick={window.location.reload}
-                          >
-                            <h5 className="p-1 m-0">{item.name}</h5>
-                            <h6 className="p-1 m-0">{item.state}</h6>
-                          </Link>
-                        </ListGroup.Item>
-                      ))}
-                    </ListGroup>
-                  </Accordion.Body>
-                </Accordion.Item>
-              </Accordion>
+        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+          <Nav style={{ alignItems: "center" }}>
+            {city && <LocationInput onChange={onChange} />}
+            {user?.role === "non-member" && (
               <Nav.Link href="/webapp/membership">Membership</Nav.Link>
-              {user ? (
-                <Nav.Link onClick={signout}>Sign Out</Nav.Link>
-              ) : (
-                <Nav.Link href="/webapp/auth">Sign In</Nav.Link>
-              )}
-            </Nav>
-          </Navbar.Collapse>
-        )}
+            )}
+            {user ? (
+              <Nav.Link onClick={() => navigate("/user")}>
+                <AvatarCircle src={getAvatar()} />
+              </Nav.Link>
+            ) : (
+              <Nav.Link href="/webapp/auth">Sign In</Nav.Link>
+            )}
+          </Nav>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

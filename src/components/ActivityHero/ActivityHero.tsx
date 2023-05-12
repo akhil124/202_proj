@@ -4,105 +4,56 @@ import "./ActivityHero.scss";
 import Icon from "../../common/Icon";
 import useApi from "../../hooks/useApi";
 import Membership from "../../pages/Membership/Memebership";
+import { useParams } from "react-router-dom";
+import { activityType } from "../../constants/activityConstants";
 
 const ActivityHero = () => {
-  const { response, error, loading } = useApi(
-    `/activities/boxing/location/hyderabad`,
-    "get"
-  );
-  const Activities = useMemo(() => response?.data ?? [], [response]);
-  console.log(Activities, "acts");
-  // const { location = "hyderabad" } = useParams();
+  const { activity = "boxing" } = useParams();
 
   return (
     <>
       <Container fluid="xxl">
-        <Row>
+        <Row sm={12}>
           <Col>
-            <Image src="/assets/images/taxi-swimming.png" />
-            <Icon fa type="duotone" icon="transgender" color="white" />
+            <Image
+              src={`/assets/images/${
+                activityType?.[activity]?.thumbnail || "boxing"
+              }.svg`}
+              alt=""
+              style={{ width: "100%", height: "100%", maxHeight: "500px" }}
+            />
           </Col>
-          <Col>
-            <h1>Activity Name</h1>
-            <h4>Tag line</h4>
-            <Icon fa type="solid" icon="user-ninja" color="black" />
+          <Col className="my-5">
+            <h1 className="text-capitalize fw-bold display-4 mb-4">
+              {activity}
+            </h1>
             <div className="amenities">
-              <p className="heading">Amenities</p>
-              <div className="amenity">
-                <div className="amenity-icon">
-                  <div className="sc-pNWdM otoxA"></div>
-                  <img
-                    alt="Premium Swimming Pools"
-                    src="https://fitso-images.curefit.co/uploads/indoor.png"
-                    loading="lazy"
-                    className="sc-kEqXSa ivNGVQ"
-                  />
-                </div>
-                <span className="amenity-text">Premium Swimming Pools</span>
+              <p className="h3 mb-4">Amenities</p>
+
+              <div className="amenity mb-3">
+                <Icon icon="https://fitso-images.curefit.co/uploads/indoor.png" size={45} />
+                <span className="mx-2 amenity-text">Premium Activity</span>
               </div>
-              <div className="amenity">
-                <div className="amenity-icon">
-                  <div className="sc-pNWdM otoxA"></div>
-                  <img
-                    alt="Certified Coaches for Guidance"
-                    src="https://fitso-images.curefit.co/uploads/coach.png"
-                    loading="lazy"
-                    className="sc-kEqXSa ivNGVQ"
-                  />
-                </div>
-                <span className="amenity-text">
+              <div className="amenity mb-3">
+                <Icon icon="https://fitso-images.curefit.co/uploads/coach.png" size={45} />
+                <span className="mx-2 amenity-text">
                   Certified Coaches for Guidance
                 </span>
               </div>
-              <div className="amenity">
-                <div className="amenity-icon">
-                  <div className="sc-pNWdM otoxA"></div>
-                  <img
-                    alt="Showers, Changing rooms &amp; Lockers Available"
-                    src="https://fitso-images.curefit.co/uploads/locker.png"
-                    loading="lazy"
-                    className="sc-kEqXSa ivNGVQ"
-                  />
-                </div>
-                <span className="amenity-text">
+              <div className="amenity mb-3">
+                <Icon icon="https://fitso-images.curefit.co/uploads/locker.png" size={45} />
+                <span className="mx-2 amenity-text">
                   Showers, Changing rooms &amp; Lockers Available
                 </span>
               </div>
-              <div className="amenity">
-                <div className="amenity-icon">
-                  <div className="sc-pNWdM otoxA"></div>
-                  <img
-                    alt="Skill Assessment System"
-                    src="https://fitso-images.curefit.co/uploads/Structured.png"
-                    loading="lazy"
-                    className="sc-kEqXSa ivNGVQ"
-                  />
-                </div>
-                <span className="amenity-text">Skill Assessment System</span>
+              <div className="amenity mb-3">
+                <Icon icon="https://fitso-images.curefit.co/uploads/Structured.png" size={45} />
+                <span className="mx-2 amenity-text">Skill Assessment System</span>
               </div>
             </div>
           </Col>
         </Row>
       </Container>
-      <Container className="activity-wrapper">
-        <p style={{ display: "flex", justifyContent: "center" }}>
-          Booking Slot for {Activities.name}
-        </p>
-        <Row className="activity-container">
-          <Tabs className="tab-container">
-            <Tab eventKey="home" title="Today">
-              {Activities.slots?.map((activity) => (
-                <Row className="time-slot">
-                  <p>{activity?.start_time}</p>
-                  <Icon fa type="duotone" icon="whistle" color="black" ></Icon>
-                </Row>
-              ))}
-            </Tab>
-            <Tab eventKey="home" title="Tomorrow"></Tab>
-          </Tabs>
-        </Row>
-      </Container>
-      <Container></Container>
     </>
   );
 };

@@ -9,7 +9,7 @@ import swaggerUi from "swagger-ui-express";
 import { connectDatabase } from "./server/config/database.js";
 import { specs } from "./server/config/swagger.js";
 
-const { PORT = 5000 } = process.env;
+const { PORT = 5002 } = process.env;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

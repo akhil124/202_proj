@@ -1,0 +1,16 @@
+export const initialUser = {
+    email: "",
+    password: "",
+    cPassword: "",
+    firstName: "",
+    lastName: "",
+    gender: "",
+    dateOfBirth: "",
+    phone: "",
+    address: "",
+    city: "",
+    state: "",
+    zip: "",
+    country: "",
+    role: "non-member",
+  }

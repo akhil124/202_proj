@@ -2,15 +2,34 @@
 
 body {
   font-size: 18x;
+
   @media (max-width: 1600px) {
     font-size: 16x;
   }
+
   @media (max-width: 768px) {
     font-size: 14x;
   }
 }
 
-*{
+* {
   font-family: 'Caudex', serif;
   font-family: 'Inter', sans-serif;
+}
+
+.accordion-button::after {
+  display: none
+}
+
+.react-select__menu,
+.react-date-picker__calendar {
+  z-index: 9999 !important;
+}
+
+.right-layout{
+  width: calc(100% - 100px);
+    position: absolute;
+    right: 0;
+    height: calc(100% - 100px);
+    overflow: auto;
 }

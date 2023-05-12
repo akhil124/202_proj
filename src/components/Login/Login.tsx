@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { MDBBtn, MDBInput, MDBCheckbox } from "mdb-react-ui-kit";
-import { useAuth } from "../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
 
-const Login = ({ callback }) => {
+const Login = ({ callback, onSubmit }) => {
   const [cred, setCred] = useState({
     email: "",
     password: "",
   });
   const [error, setError] = useState("");
-  const { user, signin } = useAuth();
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setCred({ ...cred, [e.target.name]: e.target.value });
@@ -18,19 +14,13 @@ const Login = ({ callback }) => {
 
   const handleSignIn = async () => {
     try {
-      await signin(cred.email, cred.password);
+      await onSubmit(cred.email, cred.password);
       setError("");
     } catch (err) {
       console.log(err.message);
       setError(err.response.data);
     }
   };
-
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-  }, [user, navigate]);
 
   return (
     <>

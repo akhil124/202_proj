@@ -1,46 +1,54 @@
-import React, { useMemo } from "react";
+import React, { useEffect } from "react";
 import "./ActivityList.scss";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import useApi from "../../hooks/useApi";
 import { activityType } from "../../constants/activityConstants";
-import COLOR from "../../constants/colors";
+import { getActivitiesByLocation } from "../../services/activityService";
+import { useAuth } from "../../hooks/useAuth";
 
-const ActivityList = ({ city }: { city: string }) => {
-  const { response, error, loading } = useApi(
-    `/activities/location/${city}`,
-    "get"
-  );
-  const activities = useMemo(() => response?.data ?? [], [response]);
-  const getImageIcon = (name: string) =>
-    activityType?.[name]?.icon
-      ? activityType?.[name]?.icon
-      : "https://fitso-images.curefit.co/uploads/swimming_web1625775914.png";
+const ActivityList = ({ city, style = {} }) => {
+  const [activities, setActivities] = React.useState([]);
+  const { user } = useAuth();
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await getActivitiesByLocation(city);
+        setActivities(res.data);
+      } catch (err) {
+        console.log(err);
+        setActivities([]);
+      }
+    })();
+  }, [city]);
 
   const getBackground = (name: string) =>
     activityType?.[name]?.background
       ? activityType?.[name]?.background
-      : 'rgb(237, 244, 255)';
+      : "rgb(237, 244, 255)";
 
   return (
-    <Container className="container-xxl" style={{ maxWidth: "1100px" }}>
-      <Row className="my-4">
-        <h3 className="p-0 mb-4" style={{ fontWeight: 400 }}>
-          Activities in your area
-        </h3>
-        <p className="thinline"></p>
-      </Row>
+    <Container style={{ maxWidth: "1100px", ...style }}>
+      {!user || user?.role !== "admin" && (
+        <Row className="my-4 ">
+          <h3 className="p-0 mb-4" style={{ fontWeight: 400 }}>
+            Activities in your area
+          </h3>
+          <p className="thinline"></p>
+        </Row>
+      )}
       <Row className="my-4">
         {activities?.map((activity) => (
           <Col sm="6" lg="4" className="my-2">
-            <Link to={activity.name}>
+            <Link to={`/${city}/${activity.name}`}>
               <Card
                 className="activity-card"
                 style={{ backgroundColor: getBackground(activity?.name) }}
               >
                 <Card.Img
-                  src={getImageIcon(activity?.name)}
+                  src={`/assets/images/${
+                    activityType?.[activity?.name]?.thumbnail || "boxing"
+                  }.svg`}
                   className="activity-img"
                 />
                 <Card.Body>

@@ -4,6 +4,7 @@ import React from "react";
 import Header from "../../components/Header/Header";
 import { useParams } from "react-router-dom";
 import ActivityHero from "../../components/ActivityHero/ActivityHero";
+import SlotBooking from "../../components/SlotBooking/SlotBooking";
 
 const Activity = () => {
   const { location = "hyderabad" } = useParams();
@@ -11,6 +12,7 @@ const Activity = () => {
     <Container fluid="xxxl">
       <Header city={location} />
       <ActivityHero />
+      <SlotBooking />
     </Container>
   );
 };

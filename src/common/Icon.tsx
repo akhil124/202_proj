@@ -14,7 +14,7 @@ const Icon: React.FC<IconProps> = (props) => {
   const { fa, icon, size, type, color } = props;
   const src = fa ? `/assets/icons/svgs/${type}/${icon}.svg` : icon;
   const handler = () => {
-    if (ref.current?.contentDocument?.children?.[0]) {  
+    if (ref.current?.contentDocument?.children?.[0]) {
       (ref.current.contentDocument.children[0] as HTMLElement).style.fill =
         color;
     }
@@ -22,22 +22,24 @@ const Icon: React.FC<IconProps> = (props) => {
 
   return (
     <>
-      <object
-        ref={ref}
-        data={src}
-        type="image/svg+xml"
-        style={{
-          width: `${size}px`,
-          height: `${size}px`,
-        }}
-        onLoad={handler}
-      >
+      {fa ? (
+        <object
+          ref={ref}
+          data={src}
+          type="image/svg+xml"
+          style={{
+            width: `${size}px`,
+            height: `${size}px`,
+          }}
+          onLoad={handler}
+        ></object>
+      ) : (
         <img
           src={src}
           alt=""
           style={{ width: `${size}px`, height: `${size}px` }}
         />
-      </object>
+      )}
     </>
   );
 };
